@@ -80,7 +80,7 @@ dotnet new install Avalonia.Templates
 ## How to Clone the Project
 
 ```bash
-git clone https://github.com/<your-username>/evms.git
+git clone https://github.com/reaganomolo/evms.git
 cd evms
 ```
 
