@@ -26,6 +26,9 @@ This project demonstrates desktop application development using modern .NET cros
 
 ```
 
+## Project Structure
+
+```text
 EVMS/
 │
 ├── Models/            # Data models (Voter, Candidate, Vote, etc.)
@@ -35,9 +38,9 @@ EVMS/
 ├── Program.cs         # Application entry point
 ├── App.axaml          # Application configuration
 ├── App.axaml.cs       # App startup logic
-├── evms.csproj       # Project file
-├── evms.sln          # Solution file
-
+├── evms.csproj        # Project file
+├── evms.sln           # Solution file
+```
 ````
 
 ---
