@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("evms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+214cbf1210ca4f1c5975b62654c951dfa3fa44cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("evms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("evms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
