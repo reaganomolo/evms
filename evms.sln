@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "evms", "evms.csproj", "{A93D3653-01F6-76B9-F5F8-C2F88F5D4675}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A93D3653-01F6-76B9-F5F8-C2F88F5D4675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93D3653-01F6-76B9-F5F8-C2F88F5D4675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93D3653-01F6-76B9-F5F8-C2F88F5D4675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93D3653-01F6-76B9-F5F8-C2F88F5D4675}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8605189B-B68A-4878-95D9-5E2E5FB214E3}
+	EndGlobalSection
+EndGlobal

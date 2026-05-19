@@ -1,0 +1,228 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:EVMS.Models"
+        xmlns:vm="clr-namespace:EVMS.ViewModels"
+        x:Class="EVMS.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="IIEC - Electronic Voting Management System"
+        Width="1000" Height="750"
+        Background="#F0F4F8">
+
+  <Window.DataContext>
+    <vm:MainViewModel/>
+  </Window.DataContext>
+
+  <DockPanel>
+
+    <!-- ── HEADER ─────────────────────────────────────────────── -->
+    <Border DockPanel.Dock="Top" Background="#1A237E" Padding="20,14">
+      <StackPanel>
+        <TextBlock Text="🗳  IIEC — Electronic Voting Management System"
+                   Foreground="White" FontSize="20" FontWeight="Bold"/>
+        <TextBlock Text="Independent Electoral Commission of Kenya"
+                   Foreground="#90CAF9" FontSize="12" Margin="0,2,0,0"/>
+      </StackPanel>
+    </Border>
+
+    <!-- ── STATUS BAR ─────────────────────────────────────────── -->
+    <Border DockPanel.Dock="Bottom" Padding="16,8"
+            Background="{Binding IsError, Converter={StaticResource BoolToBrushConverter}}">
+      <TextBlock Text="{Binding StatusMessage}" Foreground="White" FontSize="13"/>
+    </Border>
+
+    <!-- ── MAIN CONTENT ───────────────────────────────────────── -->
+    <Grid ColumnDefinitions="420,*" Margin="12">
+
+      <!-- LEFT PANEL: Add Voter Form -->
+      <Border Grid.Column="0" Background="White" CornerRadius="8"
+              BoxShadow="0 2 8 0 #22000000" Margin="0,0,8,0" Padding="20">
+        <ScrollViewer>
+          <StackPanel Spacing="12">
+
+            <TextBlock Text="Register New Voter" FontSize="16" FontWeight="SemiBold"
+                       Foreground="#1A237E" Margin="0,0,0,8"/>
+
+            <!-- Voter Card ID -->
+            <StackPanel>
+              <TextBlock Text="Voter Card ID *" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding VoterCardId}"
+                       Watermark="e.g. VC-2024-001234"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- National ID -->
+            <StackPanel>
+              <TextBlock Text="National ID Number *" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding NationalIdNumber}"
+                       Watermark="e.g. 12345678"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- First Name -->
+            <StackPanel>
+              <TextBlock Text="First Name *" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding FirstName}"
+                       Watermark="First name"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- Middle Name -->
+            <StackPanel>
+              <TextBlock Text="Middle Name" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding MiddleName}"
+                       Watermark="Middle name (optional)"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- Surname -->
+            <StackPanel>
+              <TextBlock Text="Surname *" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding Surname}"
+                       Watermark="Surname / Family name"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- Polling Station -->
+            <StackPanel>
+              <TextBlock Text="Polling Station *" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding PollingStation}"
+                       Watermark="e.g. Kibera Primary School"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- Date of Birth -->
+            <StackPanel>
+              <TextBlock Text="Date of Birth * (dd-mm-yyyy)" FontSize="12" Foreground="#555"/>
+              <TextBox Text="{Binding DateOfBirth}"
+                       Watermark="e.g. 15-03-1990"
+                       CornerRadius="4" Padding="8,6"/>
+            </StackPanel>
+
+            <!-- Gender -->
+            <StackPanel>
+              <TextBlock Text="Gender *" FontSize="12" Foreground="#555"/>
+              <ComboBox ItemsSource="{Binding GenderOptions}"
+                        SelectedItem="{Binding Gender}"
+                        HorizontalAlignment="Stretch"
+                        Padding="8,6"/>
+            </StackPanel>
+
+            <!-- Register Button -->
+            <Button Content="➕  Register Voter"
+                    Command="{Binding AddVoterCommand}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Background="#1A237E" Foreground="White"
+                    FontSize="14" FontWeight="SemiBold"
+                    CornerRadius="6" Padding="10,10"
+                    Margin="0,8,0,0"/>
+
+          </StackPanel>
+        </ScrollViewer>
+      </Border>
+
+      <!-- RIGHT PANEL: Search + Voter List + Delete -->
+      <Grid Grid.Column="1" RowDefinitions="Auto,*,Auto">
+
+        <!-- Search Panel -->
+        <Border Grid.Row="0" Background="White" CornerRadius="8"
+                BoxShadow="0 2 8 0 #22000000" Margin="0,0,0,8" Padding="16">
+          <StackPanel Spacing="8">
+
+            <TextBlock Text="Search / Display Voter Details"
+                       FontSize="14" FontWeight="SemiBold" Foreground="#1A237E"/>
+
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBox Grid.Column="0"
+                       Text="{Binding SearchCardId}"
+                       Watermark="Enter Voter Card ID to search..."
+                       CornerRadius="4" Padding="8,6"/>
+              <Button Grid.Column="1"
+                      Content="🔍 Search"
+                      Command="{Binding SearchVoterCommand}"
+                      Background="#0D47A1" Foreground="White"
+                      CornerRadius="4" Padding="12,6"
+                      Margin="8,0,0,0"/>
+            </Grid>
+
+            <!-- Voter Details Box (visible only when a voter is found) -->
+            <Border IsVisible="{Binding HasVoterDetails}"
+                    Background="#E8F0FE" CornerRadius="6" Padding="14">
+              <TextBlock Text="{Binding VoterDetails}"
+                         FontFamily="Courier New"
+                         FontSize="13"
+                         Foreground="#1A237E"/>
+            </Border>
+
+          </StackPanel>
+        </Border>
+
+        <!-- Voter List -->
+        <Border Grid.Row="1" Background="White" CornerRadius="8"
+                BoxShadow="0 2 8 0 #22000000" Padding="16">
+          <DockPanel>
+
+            <TextBlock DockPanel.Dock="Top"
+                       Text="{Binding Voters.Count, StringFormat='Registered Voters  ({0} total)'}"
+                       FontSize="14" FontWeight="SemiBold"
+                       Foreground="#1A237E" Margin="0,0,0,8"/>
+
+            <ListBox ItemsSource="{Binding Voters}"
+                     SelectedItem="{Binding SelectedVoter}"
+                     Background="Transparent">
+              <ListBox.ItemTemplate>
+                <!-- typed data template for the voter objects -->
+                <DataTemplate x:DataType="local:Voter">
+                  <Border Padding="10,8" CornerRadius="4"
+                          Background="#F8F9FA" Margin="0,2">
+                    <Grid ColumnDefinitions="*,Auto,Auto">
+
+                      <!-- Name + IDs -->
+                      <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding FullName}"
+                                   FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock FontSize="11" Foreground="#666">
+                          <Run Text="Card ID: "/>
+                          <Run Text="{Binding VoterCardId}"/>
+                          <Run Text="  |  National ID: "/>
+                          <Run Text="{Binding NationalIdNumber}"/>
+                        </TextBlock>
+                      </StackPanel>
+
+                      <!-- Polling Station -->
+                      <TextBlock Grid.Column="1"
+                                 Text="{Binding PollingStation}"
+                                 FontSize="11" Foreground="#888"
+                                 VerticalAlignment="Center"
+                                 Margin="8,0"/>
+
+                      <!-- Gender badge -->
+                      <TextBlock Grid.Column="2"
+                                 Text="{Binding Gender}"
+                                 FontSize="11" Foreground="#0D47A1"
+                                 VerticalAlignment="Center"/>
+
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+          </DockPanel>
+        </Border>
+
+        <!-- Delete Button -->
+        <Button Grid.Row="2"
+                Content="🗑️  Delete Selected Voter"
+                Command="{Binding DeleteVoterCommand}"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                Background="#C62828" Foreground="White"
+                FontSize="13" FontWeight="SemiBold"
+                CornerRadius="6" Padding="10,10"
+                Margin="0,8,0,0"/>
+
+      </Grid>
+    </Grid>
+  </DockPanel>
+</Window>
